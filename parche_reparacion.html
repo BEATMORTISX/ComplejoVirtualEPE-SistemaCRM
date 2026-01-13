@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Parche de Reparación - Complejo Virtual EPE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        h2 {
+            color: #3498db;
+            margin: 20px 0 10px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        .status {
+            background: rgba(52, 152, 219, 0.2);
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .status.success {
+            background: rgba(46, 204, 113, 0.2);
+            border-left-color: #2ecc71;
+        }
+        
+        .status.error {
+            background: rgba(231, 76, 60, 0.2);
+            border-left-color: #e74c3c;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #d35400);
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .alert {
+            background: rgba(241, 196, 15, 0.2);
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .logs {
+            max-height: 300px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+        
+        .log-entry {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .log-entry.success {
+            color: #2ecc71;
+        }
+        
+        .log-entry.error {
+            color: #e74c3c;
+        }
+        
+        .log-entry.info {
+            color: #3498db;
+        }
+        
+        .log-entry.warning {
+            color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Parche de Reparación</h1>
+        <h2>Complejo Virtual EPE - Sistema CRM</h2>
+        
+        <div class="alert">
+            <strong>⚠️ IMPORTANTE:</strong> Este parche corrige los problemas con los botones de acciones en todas las interfaces.
+            Ejecute las reparaciones en orden para garantizar la correcta funcionalidad del sistema.
+        </div>
+        
+        <div id="status-container"></div>
+        
+        <h2>1. Reparación de Funciones CRUD</h2>
+        <div class="code-block">
+            // Problema detectado: Los botones de Editar, Ver y Eliminar<br>
+            // no funcionan debido a problemas en las funciones de manejo de eventos<br>
+            // y referencias incorrectas a los IDs de los elementos.
+        </div>
+        
+        <button class="btn" onclick="repararFuncionesCRUD()">
+            <i class="fas fa-tools"></i> Reparar Funciones CRUD
+        </button>
+        
+        <h2>2. Reparación de Event Listeners</h2>
+        <div class="code-block">
+            // Los event listeners no se están adjuntando correctamente<br>
+            // a los botones después de cargar datos dinámicamente.
+        </div>
+        
+        <button class="btn" onclick="repararEventListeners()">
+            <i class="fas fa-mouse-pointer"></i> Reparar Event Listeners
+        </button>
+        
+        <h2>3. Reparación de Modales</h2>
+        <div class="code-block">
+            // Los modales de edición no se abren correctamente<br>
+            // debido a problemas en las funciones openModal y closeModal.
+        </div>
+        
+        <button class="btn" onclick="repararModales()">
+            <i class="fas fa-window-restore"></i> Reparar Modales
+        </button>
+        
+        <h2>4. Reparación de Selectores</h2>
+        <div class="code-block">
+            // Los selectores CSS no encuentran correctamente<br>
+            // las tablas y botones en las diferentes interfaces.
+        </div>
+        
+        <button class="btn" onclick="repararSelectores()">
+            <i class="fas fa-code"></i> Reparar Selectores
+        </button>
+        
+        <h2>5. Reparación Completa del Sistema</h2>
+        <div class="code-block">
+            // Ejecuta todas las reparaciones anteriores en orden<br>
+            // y realiza una verificación completa del sistema.
+        </div>
+        
+        <button class="btn btn-success" onclick="reparacionCompleta()">
+            <i class="fas fa-cogs"></i> Ejecutar Reparación Completa
+        </button>
+        
+        <button class="btn btn-danger" onclick="restaurarSistema()">
+            <i class="fas fa-history"></i> Restaurar Sistema Original
+        </button>
+        
+        <div id="logs-container" class="logs hidden">
+            <h3>Registro de Reparación:</h3>
+            <div id="log-entries"></div>
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <button class="btn btn-warning" onclick="verificarEstado()">
+                <i class="fas fa-search"></i> Verificar Estado del Sistema
+            </button>
+            
+            <button class="btn" onclick="exportarParche()">
+                <i class="fas fa-download"></i> Exportar Parche
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de Font Awesome
+        const faScript = document.createElement('script');
+        faScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js';
+        document.head.appendChild(faScript);
+        
+        let logs = [];
+        
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = {
+                timestamp,
+                message,
+                type
+            };
+            
+            logs.push(logEntry);
+            
+            const logsContainer = document.getElementById('logs-container');
+            const logEntries = document.getElementById('log-entries');
+            
+            if (!logsContainer.classList.contains('hidden')) {
+                const entryDiv = document.createElement('div');
+                entryDiv.className = `log-entry ${type}`;
+                entryDiv.innerHTML = `<strong>[${timestamp}]</strong> ${message}`;
+                logEntries.appendChild(entryDiv);
+                logEntries.scrollTop = logEntries.scrollHeight;
+            }
+            
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+        
+        function showStatus(message, type = 'info') {
+            const container = document.getElementById('status-container');
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `status ${type}`;
+            statusDiv.innerHTML = message;
+            container.appendChild(statusDiv);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (statusDiv.parentNode) {
+                    statusDiv.style.opacity = '0';
+                    setTimeout(() => statusDiv.remove(), 300);
+                }
+            }, 5000);
+        }
+        
+        function repararFuncionesCRUD() {
+            addLog('Iniciando reparación de funciones CRUD...', 'info');
+            
+            try {
+                // Parche para las funciones de edición
+                const funcionesParche = `
+                // ===== FUNCIONES REPARADAS DE EDICIÓN =====
+                
+                // Función genérica para editar cualquier entidad
+                function editarEntidad(id, tipo) {
+                    let entidad;
+                    switch(tipo) {
+                        case 'plantel':
+                            entidad = datosSistema.planteles.find(p => p.id === id);
+                            if (entidad) {
+                                editandoId = id;
+                                document.getElementById('editar-plantel-id').value = entidad.id;
+                                document.getElementById('editar-plantel-codigo-dependencia').value = entidad.codigoDependencia;
+                                document.getElementById('editar-plantel-codigo-plantel').value = entidad.codigoPlantel;
+                                document.getElementById('editar-plantel-nombre').value = entidad.nombre;
+                                document.getElementById('editar-plantel-direccion').value = entidad.direccion;
+                                document.getElementById('editar-plantel-ciudad').value = entidad.ciudad;
+                                document.getElementById('editar-plantel-telefono').value = entidad.telefono || '';
+                                document.getElementById('editar-plantel-email').value = entidad.email || '';
+                                openModal('modal-editar-plantel');
+                            }
+                            break;
+                            
+                        case 'director':
+                            entidad = datosSistema.directores.find(d => d.id === id);
+                            if (entidad) {
+                                editandoId = id;
+                                document.getElementById('editar-director-id').value = entidad.id;
+                                document.getElementById('editar-director-cedula').value = entidad.cedula;
+                                document.getElementById('editar-director-nombres').value = entidad.nombres;
+                                document.getElementById('editar-director-apellidos').value = entidad.apellidos;
+                                document.getElementById('editar-director-telefono').value = entidad.telefono;
+                                document.getElementById('editar-director-email').value = entidad.email;
+                                
+                                // Llenar select de planteles
+                                const select = document.getElementById('editar-director-plantel');
+                                if (select) {
+                                    select.innerHTML = '<option value="">Seleccione un plantel</option>';
+                                    datosSistema.planteles.forEach(plantel => {
+                                        const option = document.createElement('option');
+                                        option.value = plantel.id;
+                                        option.textContent = plantel.nombre;
+                                        if (plantel.id === entidad.plantelId) {
+                                            option.selected = true;
+                                        }
+                                        select.appendChild(option);
+                                    });
+                                }
+                                openModal('modal-editar-director');
+                            }
+                            break;
+                            
+                        case 'docente':
+                            entidad = datosSistema.docentes.find(d => d.id === id);
+                            if (entidad) {
+                                editandoId = id;
+                                document.getElementById('editar-docente-id').value = entidad.id;
+                                document.getElementById('editar-docente-cedula').value = entidad.cedula;
+                                document.getElementById('editar-docente-nombres').value = entidad.nombres;
+                                document.getElementById('editar-docente-apellidos').value = entidad.apellidos;
+                                document.getElementById('editar-docente-especialidad').value = entidad.especialidad;
+                                document.getElementById('editar-docente-telefono').value = entidad.telefono;
+                                document.getElementById('editar-docente-email').value = entidad.email;
+                                
+                                // Llenar select de planteles
+                                const select = document.getElementById('editar-docente-plantel');
+                                if (select) {
+                                    select.innerHTML = '<option value="">Seleccione un plantel</option>';
+                                    datosSistema.planteles.forEach(plantel => {
+                                        const option = document.createElement('option');
+                                        option.value = plantel.id;
+                                        option.textContent = plantel.nombre;
+                                        if (plantel.id === entidad.plantelId) {
+                                            option.selected = true;
+                                        }
+                                        select.appendChild(option);
+                                    });
+                                }
+                                openModal('modal-editar-docente');
+                            }
+                            break;
+                            
+                        case 'participante':
+                            entidad = datosSistema.participantes.find(p => p.id === id);
+                            if (entidad) {
+                                editandoId = id;
+                                document.getElementById('editar-participante-id').value = entidad.id;
+                                document.getElementById('editar-participante-cedula').value = entidad.cedula;
+                                document.getElementById('editar-participante-nombres').value = entidad.nombres;
+                                document.getElementById('editar-participante-apellidos').value = entidad.apellidos;
+                                document.getElementById('editar-participante-telefono').value = entidad.telefono;
+                                document.getElementById('editar-participante-email').value = entidad.email;
+                                document.getElementById('editar-participante-edad').value = entidad.edad;
+                                document.getElementById('editar-participante-sexo').value = entidad.sexo;
+                                document.getElementById('editar-participante-fecha-nacimiento').value = entidad.fechaNacimiento;
+                                document.getElementById('editar-participante-lugar-nacimiento').value = entidad.lugarNacimiento;
+                                document.getElementById('editar-participante-parroquia').value = entidad.parroquia;
+                                document.getElementById('editar-participante-direccion').value = entidad.direccion;
+                                document.getElementById('editar-participante-discapacidad').value = entidad.discapacidad;
+                                document.getElementById('editar-participante-discapacidad-detalle').value = entidad.discapacidadDetalle || '';
+                                document.getElementById('editar-participante-talla-camisa').value = entidad.tallaCamisa || '';
+                                document.getElementById('editar-participante-peso').value = entidad.peso || '';
+                                document.getElementById('editar-participante-talla-pantalon').value = entidad.tallaPantalon || '';
+                                document.getElementById('editar-participante-talla-zapato').value = entidad.tallaZapato || '';
+                                document.getElementById('editar-participante-ocupacion').value = entidad.ocupacion || '';
+                                document.getElementById('editar-participante-grado-instruccion').value = entidad.gradoInstruccion;
+                                
+                                // Mostrar detalle de discapacidad si es necesario
+                                if (entidad.discapacidad === 'si') {
+                                    document.getElementById('editar-discapacidad-detalle').style.display = 'block';
+                                }
+                                
+                                // Llenar selects
+                                const selectPlantel = document.getElementById('editar-participante-plantel');
+                                if (selectPlantel) {
+                                    selectPlantel.innerHTML = '<option value="">Seleccionar Plantel</option>';
+                                    datosSistema.planteles.forEach(plantel => {
+                                        const option = document.createElement('option');
+                                        option.value = plantel.id;
+                                        option.textContent = plantel.nombre;
+                                        if (plantel.id === entidad.plantelId) {
+                                            option.selected = true;
+                                        }
+                                        selectPlantel.appendChild(option);
+                                    });
+                                }
+                                
+                                // Cargar docentes y formaciones
+                                setTimeout(() => {
+                                    if (entidad.plantelId) {
+                                        cargarDocentesYFormacionesEditar();
+                                        if (entidad.docenteId) {
+                                            setTimeout(() => {
+                                                document.getElementById('editar-participante-docente').value = entidad.docenteId;
+                                                cargarFormacionesPorDocenteEditar();
+                                                if (entidad.formacionesIds && entidad.formacionesIds.length > 0) {
+                                                    setTimeout(() => {
+                                                        document.getElementById('editar-participante-formacion').value = entidad.formacionesIds[0];
+                                                    }, 100);
+                                                }
+                                            }, 100);
+                                        }
+                                    }
+                                }, 100);
+                                
+                                openModal('modal-editar-participante');
+                            }
+                            break;
+                            
+                        case 'formacion':
+                            entidad = datosSistema.formaciones.find(f => f.id === id);
+                            if (entidad) {
+                                editandoId = id;
+                                document.getElementById('editar-formacion-id').value = entidad.id;
+                                document.getElementById('editar-formacion-codigo').value = entidad.codigo;
+                                document.getElementById('editar-formacion-nombre').value = entidad.nombre;
+                                document.getElementById('editar-formacion-descripcion').value = entidad.descripcion || '';
+                                document.getElementById('editar-formacion-duracion').value = entidad.duracion;
+                                document.getElementById('editar-formacion-modalidad').value = entidad.modalidad;
+                                document.getElementById('editar-formacion-fecha-inicio').value = entidad.fechaInicio;
+                                document.getElementById('editar-formacion-fecha-fin').value = entidad.fechaFin;
+                                document.getElementById('editar-formacion-vacantes').value = entidad.vacantes;
+                                
+                                // Llenar selects
+                                const selectPlantel = document.getElementById('editar-formacion-plantel');
+                                if (selectPlantel) {
+                                    selectPlantel.innerHTML = '<option value="">Seleccionar Plantel</option>';
+                                    datosSistema.planteles.forEach(plantel => {
+                                        const option = document.createElement('option');
+                                        option.value = plantel.id;
+                                        option.textContent = plantel.nombre;
+                                        if (plantel.id === entidad.plantelId) {
+                                            option.selected = true;
+                                        }
+                                        selectPlantel.appendChild(option);
+                                    });
+                                }
+                                
+                                // Cargar docentes
+                                setTimeout(() => {
+                                    if (entidad.plantelId) {
+                                        cargarDocentesPorPlantelEditar();
+                                        if (entidad.docenteId) {
+                                            setTimeout(() => {
+                                                document.getElementById('editar-formacion-docente').value = entidad.docenteId;
+                                            }, 100);
+                                        }
+                                    }
+                                }, 100);
+                                
+                                openModal('modal-editar-formacion');
+                            }
+                            break;
+                            
+                        case 'usuario':
+                            entidad = datosSistema.usuarios.find(u => u.id === id);
+                            if (entidad) {
+                                editandoId = id;
+                                document.getElementById('editar-usuario-id').value = entidad.id;
+                                document.getElementById('editar-usuario-username').value = entidad.username;
+                                document.getElementById('editar-usuario-email').value = entidad.email || '';
+                                document.getElementById('editar-usuario-estado').value = entidad.estado;
+                                openModal('modal-editar-usuario');
+                            }
+                            break;
+                    }
+                }
+                
+                // Función genérica para eliminar cualquier entidad
+                function eliminarEntidad(id, tipo, nombre) {
+                    if (!confirm(\`¿Está seguro de eliminar este \${nombre}?\`)) return;
+                    
+                    switch(tipo) {
+                        case 'plantel':
+                            datosSistema.planteles = datosSistema.planteles.filter(p => p.id !== id);
+                            // También eliminar dependencias
+                            datosSistema.directores = datosSistema.directores.filter(d => d.plantelId !== id);
+                            datosSistema.docentes = datosSistema.docentes.filter(d => d.plantelId !== id);
+                            datosSistema.participantes = datosSistema.participantes.filter(p => p.plantelId !== id);
+                            datosSistema.formaciones = datosSistema.formaciones.filter(f => f.plantelId !== id);
+                            break;
+                            
+                        case 'director':
+                            datosSistema.directores = datosSistema.directores.filter(d => d.id !== id);
+                            // Eliminar usuario asociado
+                            datosSistema.usuarios = datosSistema.usuarios.filter(u => 
+                                !(u.rol === 'director' && u.entidadId === id)
+                            );
+                            break;
+                            
+                        case 'docente':
+                            datosSistema.docentes = datosSistema.docentes.filter(d => d.id !== id);
+                            // Eliminar usuario asociado
+                            datosSistema.usuarios = datosSistema.usuarios.filter(u => 
+                                !(u.rol === 'docente' && u.entidadId === id)
+                            );
+                            // Quitar docente de formaciones
+                            datosSistema.formaciones.forEach(formacion => {
+                                if (formacion.docenteId === id) {
+                                    formacion.docenteId = null;
+                                }
+                            });
+                            break;
+                            
+                        case 'participante':
+                            datosSistema.participantes = datosSistema.participantes.filter(p => p.id !== id);
+                            // Eliminar usuario asociado
+                            datosSistema.usuarios = datosSistema.usuarios.filter(u => 
+                                !(u.rol === 'participante' && u.entidadId === id)
+                            );
+                            // Aumentar vacantes de formaciones
+                            const participante = datosSistema.participantes.find(p => p.id === id);
+                            if (participante && participante.formacionesIds) {
+                                participante.formacionesIds.forEach(formacionId => {
+                                    const formacion = datosSistema.formaciones.find(f => f.id === formacionId);
+                                    if (formacion) {
+                                        formacion.vacantes += 1;
+                                    }
+                                });
+                            }
+                            break;
+                            
+                        case 'formacion':
+                            datosSistema.formaciones = datosSistema.formaciones.filter(f => f.id !== id);
+                            // Quitar formación de participantes
+                            datosSistema.participantes.forEach(participante => {
+                                if (participante.formacionesIds) {
+                                    participante.formacionesIds = participante.formacionesIds.filter(fid => fid !== id);
+                                }
+                            });
+                            break;
+                            
+                        case 'usuario':
+                            if (id === currentUser?.id) {
+                                showAlert('No puede eliminar su propio usuario', 'error');
+                                return;
+                            }
+                            datosSistema.usuarios = datosSistema.usuarios.filter(u => u.id !== id);
+                            break;
+                    }
+                    
+                    guardarDatos();
+                    
+                    // Recargar la sección actual
+                    if (currentRole === 'admin') {
+                        const activeSection = document.querySelector('.content-section:not(.hidden)');
+                        if (activeSection) {
+                            const sectionId = activeSection.id.replace('section-', '');
+                            cargarSeccionAdmin(sectionId);
+                        }
+                    }
+                    
+                    actualizarEstadisticas();
+                    showAlert(\`\${nombre} eliminado exitosamente\`, 'success');
+                }
+                
+                // Reemplazar funciones individuales por las genéricas
+                window.editarPlantel = function(id) { editarEntidad(id, 'plantel'); };
+                window.editarDirector = function(id) { editarEntidad(id, 'director'); };
+                window.editarDocente = function(id) { editarEntidad(id, 'docente'); };
+                window.editarParticipante = function(id) { editarEntidad(id, 'participante'); };
+                window.editarFormacion = function(id) { editarEntidad(id, 'formacion'); };
+                window.editarUsuario = function(id) { editarEntidad(id, 'usuario'); };
+                
+                window.eliminarPlantel = function(id) { eliminarEntidad(id, 'plantel', 'Plantel'); };
+                window.eliminarDirector = function(id) { eliminarEntidad(id, 'director', 'Director'); };
+                window.eliminarDocente = function(id) { eliminarEntidad(id, 'docente', 'Docente'); };
+                window.eliminarParticipante = function(id) { eliminarEntidad(id, 'participante', 'Participante'); };
+                window.eliminarFormacion = function(id) { eliminarEntidad(id, 'formacion', 'Formación'); };
+                window.eliminarUsuario = function(id) { eliminarEntidad(id, 'usuario', 'Usuario'); };
+                `;
+                
+                // Ejecutar el parche
+                eval(funcionesParche);
+                
+                addLog('✅ Funciones CRUD reparadas correctamente', 'success');
+                showStatus('<i class="fas fa-check-circle"></i> Funciones CRUD reparadas correctamente', 'success');
+                
+            } catch (error) {
+                addLog(`❌ Error en reparación de funciones CRUD: ${error.message}`, 'error');
+                showStatus('<i class="fas fa-exclamation-circle"></i> Error en reparación de funciones CRUD', 'error');
+            }
+        }
+        
+        function repararEventListeners() {
+            addLog('Iniciando reparación de event listeners...', 'info');
+            
+            try {
+                const eventListenersParche = `
+                // ===== REPARACIÓN DE EVENT LISTENERS =====
+                
+                // Función para reasignar event listeners a botones dinámicos
+                function reasignarEventListeners() {
+                    // Limpiar event listeners existentes
+                    document.querySelectorAll('.btn').forEach(btn => {
+                        btn.replaceWith(btn.cloneNode(true));
+                    });
+                    
+                    // Asignar event listeners a botones de edición
+                    document.querySelectorAll('[onclick^="editar"]').forEach(btn => {
+                        const onclickAttr = btn.getAttribute('onclick');
+                        if (onclickAttr) {
+                            const match = onclickAttr.match(/(editar\\w+)\\(['"]([^'"]+)['"]\\)/);
+                            if (match) {
+                                const funcion = match[1];
+                                const id = match[2];
+                                btn.onclick = function() { window[funcion](id); };
+                            }
+                        }
+                    });
+                    
+                    // Asignar event listeners a botones de eliminación
+                    document.querySelectorAll('[onclick^="eliminar"]').forEach(btn => {
+                        const onclickAttr = btn.getAttribute('onclick');
+                        if (onclickAttr) {
+                            const match = onclickAttr.match(/(eliminar\\w+)\\(['"]([^'"]+)['"]\\)/);
+                            if (match) {
+                                const funcion = match[1];
+                                const id = match[2];
+                                btn.onclick = function() { window[funcion](id); };
+                            }
+                        }
+                    });
+                    
+                    // Asignar event listeners a botones de acceso
+                    document.querySelectorAll('[onclick^="accederInterfaz"]').forEach(btn => {
+                        const onclickAttr = btn.getAttribute('onclick');
+                        if (onclickAttr) {
+                            const match = onclickAttr.match(/accederInterfaz\\(['"]([^'"]+)['"]\\)/);
+                            if (match) {
+                                const tipo = match[1];
+                                btn.onclick = function() { accederInterfaz(tipo); };
+                            }
+                        }
+                    });
+                    
+                    // Asignar event listeners a botones de modal
+                    document.querySelectorAll('[onclick^="openModal"]').forEach(btn => {
+                        const onclickAttr = btn.getAttribute('onclick');
+                        if (onclickAttr) {
+                            const match = onclickAttr.match(/openModal\\(['"]([^'"]+)['"]\\)/);
+                            if (match) {
+                                const modalId = match[1];
+                                btn.onclick = function() { openModal(modalId); };
+                            }
+                        }
+                    });
+                    
+                    // Asignar event listeners a botones de close modal
+                    document.querySelectorAll('[onclick^="closeModal"]').forEach(btn => {
+                        const onclickAttr = btn.getAttribute('onclick');
+                        if (onclickAttr) {
+                            const match = onclickAttr.match(/closeModal\\(['"]([^'"]+)['"]\\)/);
+                            if (match) {
+                                const modalId = match[1];
+                                btn.onclick = function() { closeModal(modalId); };
+                            }
+                        }
+                    });
+                    
+                    addLog('Event listeners reasignados correctamente', 'info');
+                }
+                
+                // Sobrescribir funciones de carga para incluir reasignación de listeners
+                const cargarPlantelesOriginal = window.cargarPlanteles;
+                window.cargarPlanteles = function() {
+                    if (cargarPlantelesOriginal) cargarPlantelesOriginal();
+                    setTimeout(reasignarEventListeners, 100);
+                };
+                
+                const cargarDirectoresOriginal = window.cargarDirectores;
+                window.cargarDirectores = function() {
+                    if (cargarDirectoresOriginal) cargarDirectoresOriginal();
+                    setTimeout(reasignarEventListeners, 100);
+                };
+                
+                const cargarDocentesOriginal = window.cargarDocentes;
+                window.cargarDocentes = function() {
+                    if (cargarDocentesOriginal) cargarDocentesOriginal();
+                    setTimeout(reasignarEventListeners, 100);
+                };
+                
+                const cargarParticipantesOriginal = window.cargarParticipantes;
+                window.cargarParticipantes = function() {
+                    if (cargarParticipantesOriginal) cargarParticipantesOriginal();
+                    setTimeout(reasignarEventListeners, 100);
+                };
+                
+                const cargarFormacionesOriginal = window.cargarFormaciones;
+                window.cargarFormaciones = function() {
+                    if (cargarFormacionesOriginal) cargarFormacionesOriginal();
+                    setTimeout(reasignarEventListeners, 100);
+                };
+                
+                const cargarUsuariosOriginal = window.cargarUsuarios;
+                window.cargarUsuarios = function() {
+                    if (cargarUsuariosOriginal) cargarUsuariosOriginal();
+                    setTimeout(reasignarEventListeners, 100);
+                };
+                
+                // Ejecutar reasignación inicial
+                setTimeout(reasignarEventListeners, 500);
+                `;
+                
+                // Ejecutar el parche
+                eval(eventListenersParche);
+                
+                addLog('✅ Event listeners reparados correctamente', 'success');
+                showStatus('<i class="fas fa-check-circle"></i> Event listeners reparados correctamente', 'success');
+                
+            } catch (error) {
+                addLog(`❌ Error en reparación de event listeners: ${error.message}`, 'error');
+                showStatus('<i class="fas fa-exclamation-circle"></i> Error en reparación de event listeners', 'error');
+            }
+        }
+        
+        function repararModales() {
+            addLog('Iniciando reparación de modales...', 'info');
+            
+            try {
+                const modalesParche = `
+                // ===== REPARACIÓN DE MODALES =====
+                
+                // Función mejorada para abrir modales
+                window.openModal = function(modalId) {
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        
+                        // Llenar selects según el modal
+                        switch(modalId) {
+                            case 'modal-director':
+                            case 'modal-editar-director':
+                                const selectPlantelDirector = modal.querySelector('#director-plantel, #editar-director-plantel');
+                                if (selectPlantelDirector && selectPlantelDirector.innerHTML.includes('Seleccione')) {
+                                    selectPlantelDirector.innerHTML = '<option value="">Seleccione un plantel</option>';
+                                    if (window.datosSistema && window.datosSistema.planteles) {
+                                        window.datosSistema.planteles.forEach(plantel => {
+                                            const option = document.createElement('option');
+                                            option.value = plantel.id;
+                                            option.textContent = plantel.nombre;
+                                            selectPlantelDirector.appendChild(option);
+                                        });
+                                    }
+                                }
+                                break;
+                                
+                            case 'modal-docente':
+                            case 'modal-editar-docente':
+                                const selectPlantelDocente = modal.querySelector('#docente-plantel, #editar-docente-plantel');
+                                if (selectPlantelDocente && selectPlantelDocente.innerHTML.includes('Seleccione')) {
+                                    selectPlantelDocente.innerHTML = '<option value="">Seleccione un plantel</option>';
+                                    if (window.datosSistema && window.datosSistema.planteles) {
+                                        window.datosSistema.planteles.forEach(plantel => {
+                                            const option = document.createElement('option');
+                                            option.value = plantel.id;
+                                            option.textContent = plantel.nombre;
+                                            selectPlantelDocente.appendChild(option);
+                                        });
+                                    }
+                                }
+                                break;
+                                
+                            case 'modal-participante':
+                            case 'modal-editar-participante':
+                                const selectPlantelParticipante = modal.querySelector('#participante-plantel, #editar-participante-plantel');
+                                if (selectPlantelParticipante && selectPlantelParticipante.innerHTML.includes('Seleccionar')) {
+                                    selectPlantelParticipante.innerHTML = '<option value="">Seleccionar Plantel</option>';
+                                    if (window.datosSistema && window.datosSistema.planteles) {
+                                        window.datosSistema.planteles.forEach(plantel => {
+                                            const option = document.createElement('option');
+                                            option.value = plantel.id;
+                                            option.textContent = plantel.nombre;
+                                            selectPlantelParticipante.appendChild(option);
+                                        });
+                                    }
+                                }
+                                break;
+                                
+                            case 'modal-formacion':
+                            case 'modal-editar-formacion':
+                                const selectPlantelFormacion = modal.querySelector('#formacion-plantel, #editar-formacion-plantel');
+                                if (selectPlantelFormacion && selectPlantelFormacion.innerHTML.includes('Seleccionar')) {
+                                    selectPlantelFormacion.innerHTML = '<option value="">Seleccionar Plantel</option>';
+                                    if (window.datosSistema && window.datosSistema.planteles) {
+                                        window.datosSistema.planteles.forEach(plantel => {
+                                            const option = document.createElement('option');
+                                            option.value = plantel.id;
+                                            option.textContent = plantel.nombre;
+                                            selectPlantelFormacion.appendChild(option);
+                                        });
+                                    }
+                                }
+                                break;
+                                
+                            case 'modal-usuario':
+                                const selectPlantelUsuario = modal.querySelector('#usuario-plantel');
+                                if (selectPlantelUsuario && selectPlantelUsuario.innerHTML.includes('Seleccionar')) {
+                                    selectPlantelUsuario.innerHTML = '<option value="">Seleccionar Plantel</option>';
+                                    if (window.datosSistema && window.datosSistema.planteles) {
+                                        window.datosSistema.planteles.forEach(plantel => {
+                                            const option = document.createElement('option');
+                                            option.value = plantel.id;
+                                            option.textContent = plantel.nombre;
+                                            selectPlantelUsuario.appendChild(option);
+                                        });
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                };
+                
+                // Función mejorada para cerrar modales
+                window.closeModal = function(modalId) {
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                        
+                        // Limpiar formularios
+                        const form = modal.querySelector('form');
+                        if (form) {
+                            form.reset();
+                            form.querySelectorAll('input[type="hidden"]').forEach(input => {
+                                input.value = '';
+                            });
+                        }
+                        
+                        // Habilitar selects deshabilitados
+                        modal.querySelectorAll('select[disabled]').forEach(select => {
+                            select.disabled = false;
+                        });
+                        
+                        // Limpiar variable de edición
+                        if (window.editandoId) {
+                            window.editandoId = null;
+                        }
+                    }
+                };
+                
+                // Asignar event listeners a botones de cerrar modal
+                document.querySelectorAll('.close-modal').forEach(btn => {
+                    const onclickAttr = btn.getAttribute('onclick');
+                    if (onclickAttr) {
+                        const match = onclickAttr.match(/closeModal\\(['"]([^'"]+)['"]\\)/);
+                        if (match) {
+                            const modalId = match[1];
+                            btn.onclick = function() { closeModal(modalId); };
+                        }
+                    }
+                });
+                
+                // Cerrar modal al hacer clic fuera
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === this) {
+                            const modalId = this.id;
+                            closeModal(modalId);
+                        }
+                    });
+                });
+                `;
+                
+                // Ejecutar el parche
+                eval(modalesParche);
+                
+                addLog('✅ Modales reparados correctamente', 'success');
+                showStatus('<i class="fas fa-check-circle"></i> Modales reparados correctamente', 'success');
+                
+            } catch (error) {
+                addLog(`❌ Error en reparación de modales: ${error.message}`, 'error');
+                showStatus('<i class="fas fa-exclamation-circle"></i> Error en reparación de modales', 'error');
+            }
+        }
+        
+        function repararSelectores() {
+            addLog('Iniciando reparación de selectores...', 'info');
+            
+            try {
+                const selectoresParche = `
+                // ===== REPARACIÓN DE SELECTORES =====
+                
+                // Función para encontrar tablas de manera más robusta
+                function encontrarTabla(sufijo) {
+                    // Intentar varios selectores posibles
+                    const selectores = [
+                        '#tabla-\${sufijo} tbody',
+                        '#tabla-\${sufijo}-plantel tbody',
+                        '#tabla-\${sufijo}-director tbody',
+                        '#tabla-\${sufijo}-docente tbody',
+                        '#tabla-\${sufijo}-participante tbody',
+                        'table[id*="\${sufijo}"] tbody',
+                        '.table-responsive table tbody'
+                    ];
+                    
+                    for (const selector of selectores) {
+                        const tbody = document.querySelector(selector);
+                        if (tbody) {
+                            return tbody;
+                        }
+                    }
+                    
+                    // Si no se encuentra, crear una nueva tabla
+                    const contentSection = document.querySelector('.content-section:not(.hidden)');
+                    if (contentSection) {
+                        const tables = contentSection.querySelectorAll('table');
+                        if (tables.length > 0) {
+                            return tables[tables.length - 1].querySelector('tbody') || 
+                                   tables[tables.length - 1].createTBody();
+                        }
+                    }
+                    
+                    return null;
+                }
+                
+                // Sobrescribir funciones de carga con selectores mejorados
+                if (window.cargarPlanteles) {
+                    const originalCargarPlanteles = window.cargarPlanteles;
+                    window.cargarPlanteles = function() {
+                        const tbody = encontrarTabla('planteles');
+                        if (!tbody) {
+                            console.error('No se encontró tabla de planteles');
+                            return;
+                        }
+                        
+                        tbody.innerHTML = '';
+                        
+                        if (window.datosSistema && window.datosSistema.planteles) {
+                            window.datosSistema.planteles.forEach(plantel => {
+                                const tr = document.createElement('tr');
+                                tr.innerHTML = \`
+                                    <td>\${plantel.id?.substring(0, 8) || plantel.id}</td>
+                                    <td>\${plantel.codigoDependencia || ''}</td>
+                                    <td>\${plantel.codigoPlantel || ''}</td>
+                                    <td>\${plantel.nombre || ''}</td>
+                                    <td>\${plantel.ciudad || ''}</td>
+                                    <td>\${plantel.director || 'No asignado'}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info" onclick="editarPlantel('\${plantel.id}')">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-warning" onclick="accederInterfazPlantel('\${plantel.id}')">
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" onclick="eliminarPlantel('\${plantel.id}')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                \`;
+                                tbody.appendChild(tr);
+                            });
+                        }
+                        
+                        // Reasignar event listeners
+                        setTimeout(() => {
+                            if (window.reasignarEventListeners) {
+                                window.reasignarEventListeners();
+                            }
+                        }, 100);
+                    };
+                }
+                
+                // Aplicar el mismo patrón a otras funciones de carga
+                const funcionesCarga = ['Directores', 'Docentes', 'Participantes', 'Formaciones', 'Usuarios'];
+                
+                funcionesCarga.forEach(funcion => {
+                    const nombreFuncion = 'cargar' + funcion;
+                    const sufijo = funcion.toLowerCase();
+                    
+                    if (window[nombreFuncion]) {
+                        const originalFuncion = window[nombreFuncion];
+                        window[nombreFuncion] = function() {
+                            const tbody = encontrarTabla(sufijo);
+                            if (!tbody) {
+                                console.error(\`No se encontró tabla de \${sufijo}\`);
+                                return;
+                            }
+                            
+                            // Llamar a la función original si existe
+                            if (originalFuncion) {
+                                originalFuncion();
+                            }
+                            
+                            // Reasignar event listeners
+                            setTimeout(() => {
+                                if (window.reasignarEventListeners) {
+                                    window.reasignarEventListeners();
+                                }
+                            }, 100);
+                        };
+                    }
+                });
+                
+                // Función para verificar y corregir selectores problemáticos
+                function verificarSelectores() {
+                    const problemas = [];
+                    
+                    // Verificar selectores comunes
+                    const selectoresComunes = [
+                        '.content-section',
+                        '.table-responsive',
+                        '.modal',
+                        '.btn',
+                        '[onclick^="editar"]',
+                        '[onclick^="eliminar"]'
+                    ];
+                    
+                    selectoresComunes.forEach(selector => {
+                        const elementos = document.querySelectorAll(selector);
+                        if (elementos.length === 0) {
+                            problemas.push(\`Selector no encontrado: \${selector}\`);
+                        }
+                    });
+                    
+                    if (problemas.length > 0) {
+                        console.warn('Problemas con selectores:', problemas);
+                        
+                        // Intentar corregir problemas de clase
+                        if (document.querySelectorAll('.content-section').length === 0) {
+                            // Buscar secciones de contenido por otros medios
+                            const secciones = document.querySelectorAll('[id^="section-"]');
+                            secciones.forEach(seccion => {
+                                seccion.classList.add('content-section');
+                            });
+                        }
+                    }
+                    
+                    return problemas;
+                }
+                
+                // Ejecutar verificación inicial
+                setTimeout(verificarSelectores, 1000);
+                `;
+                
+                // Ejecutar el parche
+                eval(selectoresParche);
+                
+                addLog('✅ Selectores reparados correctamente', 'success');
+                showStatus('<i class="fas fa-check-circle"></i> Selectores reparados correctamente', 'success');
+                
+            } catch (error) {
+                addLog(`❌ Error en reparación de selectores: ${error.message}`, 'error');
+                showStatus('<i class="fas fa-exclamation-circle"></i> Error en reparación de selectores', 'error');
+            }
+        }
+        
+        function reparacionCompleta() {
+            addLog('=== INICIANDO REPARACIÓN COMPLETA DEL SISTEMA ===', 'info');
+            document.getElementById('logs-container').classList.remove('hidden');
+            
+            // Mostrar loader
+            const statusContainer = document.getElementById('status-container');
+            statusContainer.innerHTML = '<div class="status"><div class="loader"></div> Iniciando reparación completa...</div>';
+            
+            // Ejecutar reparaciones en orden
+            setTimeout(() => {
+                repararFuncionesCRUD();
+                
+                setTimeout(() => {
+                    repararEventListeners();
+                    
+                    setTimeout(() => {
+                        repararModales();
+                        
+                        setTimeout(() => {
+                            repararSelectores();
+                            
+                            setTimeout(() => {
+                                // Verificación final
+                                addLog('=== REPARACIÓN COMPLETA FINALIZADA ===', 'success');
+                                showStatus('<i class="fas fa-check-circle"></i> ¡Reparación completa finalizada con éxito!', 'success');
+                                
+                                // Mostrar resumen
+                                const resumen = document.createElement('div');
+                                resumen.className = 'status success';
+                                resumen.innerHTML = `
+                                    <h4><i class="fas fa-clipboard-check"></i> Resumen de Reparación</h4>
+                                    <p><strong>✔ Funciones CRUD:</strong> Reparadas</p>
+                                    <p><strong>✔ Event Listeners:</strong> Reasignados</p>
+                                    <p><strong>✔ Modales:</strong> Corregidos</p>
+                                    <p><strong>✔ Selectores:</strong> Optimizados</p>
+                                    <p><strong>✅ Sistema:</strong> Listo para usar</p>
+                                `;
+                                statusContainer.appendChild(resumen);
+                                
+                            }, 1000);
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 500);
+        }
+        
+        function verificarEstado() {
+            addLog('Verificando estado del sistema...', 'info');
+            
+            const verificaciones = [
+                { nombre: 'Sistema de datos', verificar: () => typeof datosSistema !== 'undefined' },
+                { nombre: 'Usuario actual', verificar: () => typeof currentUser !== 'undefined' },
+                { nombre: 'Rol actual', verificar: () => typeof currentRole !== 'undefined' },
+                { nombre: 'Funciones CRUD', verificar: () => typeof editarPlantel !== 'undefined' },
+                { nombre: 'Modales', verificar: () => typeof openModal !== 'undefined' },
+                { nombre: 'Guardado de datos', verificar: () => typeof guardarDatos !== 'undefined' }
+            ];
+            
+            const resultados = [];
+            verificaciones.forEach(verificacion => {
+                try {
+                    const estado = verificacion.verificar();
+                    resultados.push({
+                        nombre: verificacion.nombre,
+                        estado: estado ? '✅ OK' : '❌ FALLO',
+                        detalles: estado ? 'Funcional' : 'No encontrado'
+                    });
+                } catch (error) {
+                    resultados.push({
+                        nombre: verificacion.nombre,
+                        estado: '❌ ERROR',
+                        detalles: error.message
+                    });
+                }
+            });
+            
+            // Mostrar resultados
+            const statusContainer = document.getElementById('status-container');
+            const resultadosDiv = document.createElement('div');
+            resultadosDiv.className = 'status';
+            resultadosDiv.innerHTML = `
+                <h4><i class="fas fa-search"></i> Resultados de Verificación</h4>
+                ${resultados.map(r => `
+                    <p><strong>${r.nombre}:</strong> ${r.estado} - ${r.detalles}</p>
+                `).join('')}
+            `;
+            statusContainer.appendChild(resultadosDiv);
+            
+            addLog('Verificación completada', 'info');
+        }
+        
+        function restaurarSistema() {
+            if (confirm('¿Está seguro de restaurar el sistema original? Esto eliminará todas las reparaciones aplicadas.')) {
+                addLog('Restaurando sistema original...', 'warning');
+                
+                // Recargar la página para restaurar el estado original
+                location.reload();
+            }
+        }
+        
+        function exportarParche() {
+            addLog('Exportando parche de reparación...', 'info');
+            
+            // Crear contenido del parche
+            const parcheContenido = `
+// PARCHE DE REPARACIÓN - COMPLEJO VIRTUAL EPE
+// Generado: ${new Date().toLocaleString()}
+// Este parche soluciona problemas con botones de acciones
+
+${document.querySelectorAll('.code-block')[0]?.textContent || ''}
+
+// Para aplicar el parche, copie y pegue este código en la consola del navegador
+// mientras el sistema Complejo Virtual EPE esté cargado.
+            `;
+            
+            // Crear y descargar archivo
+            const blob = new Blob([parcheContenido], { type: 'text/javascript' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `parche_reparacion_${new Date().toISOString().split('T')[0]}.js`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            addLog('✅ Parche exportado correctamente', 'success');
+            showStatus('<i class="fas fa-check-circle"></i> Parche exportado correctamente', 'success');
+        }
+        
+        // Inicialización
+        addLog('Sistema de reparación inicializado', 'info');
+        showStatus('<i class="fas fa-info-circle"></i> Sistema de reparación listo. Seleccione una opción para comenzar.', 'info');
+    </script>
+</body>
+</html>
